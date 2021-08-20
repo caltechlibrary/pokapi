@@ -1,0 +1,10 @@
+# =============================================================================
+# @file    requirements.txt
+# @brief   Python dependencies for Fop
+# @created 2021-08-20
+# @license Please see the file named LICENSE in the project directory
+# @website https://github.com/caltechlibrary/fop
+# =============================================================================
+
+commonpy  == 1.3.9
+sidetrack == 2.0.0
