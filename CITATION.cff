@@ -15,5 +15,5 @@ keywords:
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/caltechlibrary/fop"
 title: "Folio Objects in Python"
-version: "0.0.1"
+version: "0.0.0"
 ...
