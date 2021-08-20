@@ -1,9 +1,5 @@
-Change log for REPOSITORY
-=========================
+# Change log for fop
 
-Version 0.0.0
--------------
+## Version 0.0.1
 
-* Write about a change here
-* Write about another change here
-* Write about a 3rd change
+Started project and created PyPI placeholder.
