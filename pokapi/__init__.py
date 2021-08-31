@@ -33,9 +33,10 @@ __license__     = 'BSD 3-clause'
 # .............................................................................
 
 from .exceptions import FolioError, DataMismatchError, NotFound
-from .folio      import Folio, FolioItem, FolioRecord
+from .folio      import Folio
+from .record     import FolioRecord
 
-__all__ = [Folio, FolioItem, FolioRecord, FolioError, DataMismatchError, NotFound]
+__all__ = [Folio, FolioRecord, FolioError, DataMismatchError, NotFound]
 
 
 # Miscellaneous utilities.
