@@ -2,11 +2,11 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "description": "Python package for getting basic data from a FOLIO ILS server",
-  "name": "Fop",
-  "codeRepository": "https://github.com/caltechlibrary/fop",
-  "issueTracker": "https://github.com/caltechlibrary/fop/issues",
-  "license": "https://github.com/caltechlibrary/fop/blob/main/LICENSE",
-  "version": "0.0.0",
+  "name": "Pokapi",
+  "codeRepository": "https://github.com/caltechlibrary/pokapi",
+  "issueTracker": "https://github.com/caltechlibrary/pokapi/issues",
+  "license": "https://github.com/caltechlibrary/pokapi/blob/main/LICENSE",
+  "version": "0.0.1",
   "author": [
     {
       "@type": "Person",
@@ -17,7 +17,7 @@
       "@id": "https://orcid.org/0000-0001-9105-5960"
     }],
   "developmentStatus": "active",
-  "downloadUrl": "https://github.com/caltechlibrary/fop/archive/main.zip",
+  "downloadUrl": "https://github.com/caltechlibrary/pokapi/archive/main.zip",
   "keywords": [
     "software",
     "science"
