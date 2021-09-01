@@ -20,6 +20,7 @@ from   commonpy.string_utils import antiformat
 from   commonpy.network_utils import net
 import json
 from   json import JSONDecodeError
+import re
 
 if __debug__:
     from sidetrack import log
@@ -114,8 +115,8 @@ class Folio():
         instance_id = json_dict['id']
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
         return FolioRecord(id            = instance_id,
-                           title         = json_dict['indexTitle'],
-                           author        = author_list(json_dict['contributors']),
+                           title         = pub_title(json_dict['title']),
+                           author        = pub_authors(json_dict['contributors']),
                            year          = pub_year(json_dict['publication']),
                            isbn_issn     = isbn_issn,
                            publisher     = publisher(json_dict['publication']),
@@ -162,7 +163,6 @@ def cleaned(text):
     text = text.rstrip('./')
     return text.strip()
 
-
 def pub_year(publication_list):
     if publication_list:
         year = publication_list[0]['dateOfPublication']
@@ -178,8 +178,28 @@ def publisher(publication_list):
         return ''
 
 
-def author_list(contributors_list):
-    return ' and '.join(author['name'] for author in contributors_list)
+def pub_title(title_string):
+    title, author = parsed_title_and_author(title_string)
+    return title
+
+
+def pub_authors(contributors_list):
+    # We can either get the authors from the title string, or the Folio field
+    # named "contributors".  Currently I'm using the contributors list in
+    # part because the authors' names are put in a more consistent format
+    # of "last name, first name".  However, there's additional stuff in the
+    # author data that we want to remove.
+    name_and_comment = re.compile('[^(]+?\(')
+    def extracted_name(field):
+        author = field['name']
+        matched = name_and_comment.match(author)
+        if matched:
+            end = matched.end() - 1
+            return author[:end].strip()
+        else:
+            return author
+
+    return ' and '.join(extracted_name(author) for author in contributors_list)
 
 
 def details_page(instance_id):
@@ -210,3 +230,26 @@ def id_from_an(accession_number):
 
 def an_from_id(instance_id):
     return 'clc.' + instance_id.replace('-', '.')
+
+
+def parsed_title_and_author(text):
+    '''Extract a title and authors (if present) from the given text string.'''
+    title = None
+    author = None
+    if text.find('/') > 0:
+        start = text.find('/')
+        title = text[:start].strip()
+        author = text[start + 3:].strip()
+    elif text.find('[by]') > 0:
+        start = text.find('[by]')
+        title = text[:start].strip()
+        author = text[start + 5:].strip()
+    elif text.rfind(', by') > 0:
+        start = text.rfind(', by')
+        title = text[:start].strip()
+        author = text[start + 5:].strip()
+    else:
+        title = text
+    if title.endswith(':'):
+        title = title[:-1].strip()
+    return title, author
