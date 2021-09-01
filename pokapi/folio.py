@@ -120,7 +120,8 @@ class Folio():
                            isbn_issn     = isbn_issn,
                            publisher     = publisher(json_dict['publication']),
                            details_page  = details_page(instance_id),
-                           thumbnail_url = thumbnail_url_for_pub(isbn_issn))
+                           thumbnail_url = thumbnail_url_for_pub(isbn_issn),
+                           _raw_data     = json_dict)
 
 
     def _result_from_api(self, url, result_producer, retry = 0):
