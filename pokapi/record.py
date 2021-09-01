@@ -28,6 +28,9 @@ class FolioRecord():
 
     This object is at the level of abstraction corresponding to FOLIO's
     "instance" records. The "id" is the instance id.
+
+    Some field values may be empty strings, depending on the record. For
+    example, journals will not have a "year" value.
     '''
 
     # The reason for an explicit list of fields here is so that we can use it
@@ -35,11 +38,11 @@ class FolioRecord():
     __fields = {
         'id'            : str,          # id of Folio instance record
         'details_page'  : str,          # URL to page in EDS
-        'title'         : str,          # indexTitle
+        'title'         : str,          # extracted from instance "title" field
         'author'        : str,          # string concatenated from contributors
         'publisher'     : str,          # publication.publisher
-        'isbn_issn'     : str,          #
         'year'          : str,          # publication.year
+        'isbn_issn'     : str,          #
         'thumbnail_url' : str,          #
     }
 
