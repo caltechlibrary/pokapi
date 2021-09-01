@@ -38,6 +38,7 @@ class FolioRecord():
         'title'         : str,          # indexTitle
         'author'        : str,          # string concatenated from contributors
         'publisher'     : str,          # publication.publisher
+        'isbn_issn'     : str,          #
         'year'          : str,          # publication.year
         'thumbnail_url' : str,          #
     }
@@ -54,22 +55,6 @@ class FolioRecord():
         # Set values if given arguments.
         for field, value in kwargs.items():
             setattr(self, field, value)
-
-
-    def __getattribute__(self, attr):
-        if attr == 'thumbnail_url':
-            if self._saved_thumbnail_url is not None:
-                return self._saved_thumbnail_url
-            if __debug__: log(f'getting thumbnail url')
-            self._saved_thumbnail_url = self._thumbnail_for_record()
-            return self._saved_thumbnail_url
-        return object.__getattribute__(self, attr)
-
-
-    def __setattr__(self, attr, value):
-        if attr == 'folio_id' and getattr(self, "_server_url", None):
-            object.__setattr__(self, 'folio_url', f'{self._server_url}/record/{value}')
-        object.__setattr__(self, attr, value)
 
 
     def __str__(self):
