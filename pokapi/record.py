@@ -44,10 +44,9 @@ class FolioRecord():
     }
 
 
-    def __init__(self, server_url = None, **kwargs):
+    def __init__(self, **kwargs):
         # Internal variables.  Need to set these first.
-        self._server_url = server_url
-        self._saved_thumbnail_url = None
+        self._raw_data = None
 
         # Always first initialize every field.
         for field, field_type in self.__fields.items():
