@@ -42,7 +42,7 @@ _INSTANCE_FOR_BARCODE = '{}/inventory/instances?query=item.barcode%3D%3D{}'
 _INSTANCE_FOR_INSTANCE_ID = '{}/instance-storage/instances/{}'
 
 # URL template for a link to the Detailed Record page in EDS.
-_DETAILS_PAGE_FOR_AN = 'https://caltech.idm.oclc.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=cat08655a&AN={}'
+_DETAILS_PAGE_FOR_AN = 'https://caltech.idm.oclc.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=cat08655a&AN={}&site=eds-live&scope=site'
 
 # Type identifiers for some things we look for.
 _TYPE_ID_ISBN = '8261054f-be78-422d-bd51-4ed9f33c3422'
