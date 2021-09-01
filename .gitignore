@@ -92,3 +92,4 @@ __pycache__
 # Project-specific things to ignore:
 # .............................................................................
 
+tests/settings.ini
