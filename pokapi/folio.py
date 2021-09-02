@@ -180,7 +180,7 @@ def publisher(publication_list):
 
 def pub_title(title_string):
     title, author = parsed_title_and_author(title_string)
-    return title
+    return cleaned(title)
 
 
 def pub_authors(contributors_list):
