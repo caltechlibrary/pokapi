@@ -15,10 +15,17 @@ from decouple import config
 from pokapi import Folio, FolioRecord
 from pokapi.thumbnail import *
 
+# These can be set as environment variables or written in a file called
+# settings.ini in this directory.
 okapi_url   = config('OKAPI_URL')
 okapi_token = config('OKAPI_TOKEN')
 tenant_id   = config('TENANT_ID')
 
+# We can't go on without these values
+if not all([foo, okapi_url, okapi_token, tenant_id]):
+    raise RuntimeError('Missing value(s) of needed configuration variables')
+
+# This Folio interface object is used throughout the rest of this file.
 folio = folio = Folio(okapi_url = okapi_url,
                       okapi_token = okapi_token,
                       tenant_id = tenant_id)
