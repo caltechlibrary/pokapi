@@ -26,9 +26,9 @@ if not all([foo, okapi_url, okapi_token, tenant_id]):
     raise RuntimeError('Missing value(s) of needed configuration variables')
 
 # This Folio interface object is used throughout the rest of this file.
-folio = folio = Folio(okapi_url = okapi_url,
-                      okapi_token = okapi_token,
-                      tenant_id = tenant_id)
+folio = Folio(okapi_url = okapi_url,
+              okapi_token = okapi_token,
+              tenant_id = tenant_id)
 
 
 def test_folio_different_ids():
