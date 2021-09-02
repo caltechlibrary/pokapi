@@ -41,7 +41,7 @@ python3 -m pip install git+https://github.com/caltechlibrary/pokapi.git
 
 ## Usage
 
-Pokapi currently provides a basic interface to retrieve records using identifiers that can be Folio instance identifiers, item barcodes, or EDS accession numbers. To use Pokapi, first create a `Folio` object with parameters that provide the Okapi URL for your instance, an Okapi API token, and a tenant id.  Assuming that the values are stored in separate variables named `the_okapi_url`, `the_okapi_token`, and `the_tenant_id`, the following code will create a `Folio` object:
+Pokapi currently provides a basic interface to retrieve records using identifiers that can be FOLIO instance identifiers, item barcodes, or EDS accession numbers. To use Pokapi, first create a `Folio` object with parameters that provide the Okapi URL for your instance, an Okapi API token, and a tenant id.  Assuming that the values are stored in separate variables named `the_okapi_url`, `the_okapi_token`, and `the_tenant_id`, the following code will create a `Folio` object:
 ```python
 from pokapi import Folio, FolioRecord
 
@@ -50,7 +50,7 @@ folio = Folio(okapi_url = the_okapi_url,
               tenant_id = the_tenant_id)
 ```
 
-The `Folio` class has only one method on it currently: `record(...)`. This method contacts the Folio server to obtain data and returns a `FolioRecord` object with the data stored in fields. The following fields are implemented at this time:
+The `Folio` class has only one method on it currently: `record(...)`. This method contacts the FOLIO server to obtain data and returns a `FolioRecord` object with the data stored in fields. The following fields are implemented at this time:
 
 | Field           | Type   | Meaning |
 |-----------------|--------|---------|
@@ -66,7 +66,7 @@ The `Folio` class has only one method on it currently: `record(...)`. This metho
 The method `Folio.record(...)` can take any one of the following mutually-exclusive keyword arguments to identify the record to be retrieved:
 
 * `barcode`: retrieve the record corresponding to the given item barcode
-* `instance_id`: retrieve the record having the given Folio instance identifier
+* `instance_id`: retrieve the record having the given FOLIO instance identifier
 * `accession_number`: retrieve the record corresponding to the accession number in EDS
 
 Here is an example of using the method:
