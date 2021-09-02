@@ -57,7 +57,7 @@ def test_folio_field_values1():
 def test_folio_field_values2():
     r = folio.record(accession_number = "clc.3d7bea51.8ed5.4b82.9a93.87f3b4e42374")
     assert r.id == "3d7bea51-8ed5-4b82-9a93-87f3b4e42374"
-    assert r.title == "Journal of environmental psychology [electronic resource]."
+    assert r.title == "Journal of environmental psychology [electronic resource]"
     assert r.year == ""
     assert r.isbn_issn == "1522-9610"
     assert r.publisher == "Academic Press"
