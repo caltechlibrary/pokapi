@@ -22,7 +22,7 @@ okapi_token = config('OKAPI_TOKEN')
 tenant_id   = config('TENANT_ID')
 
 # We can't go on without these values
-if not all([foo, okapi_url, okapi_token, tenant_id]):
+if not all([okapi_url, okapi_token, tenant_id]):
     raise RuntimeError('Missing value(s) of needed configuration variables')
 
 # This Folio interface object is used throughout the rest of this file.
