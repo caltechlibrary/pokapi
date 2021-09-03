@@ -120,6 +120,7 @@ class Folio():
                            year          = pub_year(json_dict['publication']),
                            isbn_issn     = isbn_issn,
                            publisher     = publisher(json_dict['publication']),
+                           edition       = pub_edition(json_dict['editions']),
                            details_page  = details_page(instance_id),
                            thumbnail_url = thumbnail_url_for_pub(isbn_issn),
                            _raw_data     = json_dict)
@@ -200,6 +201,12 @@ def pub_authors(contributors_list):
             return author
 
     return ' and '.join(extracted_name(author) for author in contributors_list)
+
+
+def pub_edition(editions):
+    if editions:
+        return editions[0]
+    return ''
 
 
 def details_page(instance_id):

@@ -41,6 +41,7 @@ class FolioRecord():
         'title'         : str,          # extracted from instance "title" field
         'author'        : str,          # string concatenated from contributors
         'publisher'     : str,          # publication.publisher
+        'edition'       : str,          # editions[0]
         'year'          : str,          # publication.year
         'isbn_issn'     : str,          #
         'thumbnail_url' : str,          #
