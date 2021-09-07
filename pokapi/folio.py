@@ -202,7 +202,7 @@ def pub_authors(contributors_list):
     # part because the authors' names are put in a more consistent format
     # of "last name, first name".  However, there's additional stuff in the
     # author data that we want to remove.
-    name_and_comment = re.compile('[^(]+?\(')
+    name_and_comment = re.compile(r'[^(]+?\(')
     def extracted_name(field):
         author = field['name']
         matched = name_and_comment.match(author)
