@@ -13,7 +13,6 @@ except:
 from decouple import config
 
 from pokapi import Folio, FolioRecord
-from pokapi.thumbnail import *
 
 # These can be set as environment variables or written in a file called
 # settings.ini in this directory.
@@ -40,7 +39,6 @@ def test_folio_different_ids():
     assert item1.year == item2.year
     assert item1.publisher == item2.publisher
     assert item1.details_page == item2.details_page
-    assert item1.thumbnail_url == item2.thumbnail_url
     assert item1.isbn_issn == item2.isbn_issn
 
 
