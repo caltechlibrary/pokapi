@@ -10,3 +10,5 @@ commonpy        >= 1.3.10
 lxml            >= 4.6.3
 python-decouple >= 3.4
 sidetrack       >= 1.4.0
+uritemplate     >= 3.0.0
+validators      >= 0.18.2
