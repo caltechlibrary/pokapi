@@ -60,11 +60,6 @@ class FolioRecord():
             setattr(self, field, value)
 
 
-    def __str__(self):
-        info = f' {self.id}' if self.id else ''
-        return f'FolioRecord{info}'
-
-
     def __repr__(self):
         field_values = []
         for field in sorted(self.__fields.keys()):
