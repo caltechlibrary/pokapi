@@ -5,6 +5,8 @@ import os
 import pytest
 import sys
 import warnings
+import uritemplate
+import validators
 
 try:
     thisdir = os.path.dirname(os.path.abspath(__file__))
@@ -22,18 +24,23 @@ warnings.filterwarnings("ignore", category = DeprecationWarning)
 
 # These can be set as environment variables or written in a file called
 # settings.ini in this directory.
-okapi_url   = config('OKAPI_URL')
-okapi_token = config('OKAPI_TOKEN')
-tenant_id   = config('TENANT_ID')
+okapi_url     = config('OKAPI_URL')
+okapi_token   = config('OKAPI_TOKEN')
+tenant_id     = config('TENANT_ID')
+an_prefix     = config('AN_PREFIX')
+page_template = config('PAGE_TEMPLATE')
 
 # We can't go on without these values
 if not all([okapi_url, okapi_token, tenant_id]):
     raise RuntimeError('Missing value(s) of needed configuration variables')
 
 # This Folio interface object is used throughout the rest of this file.
-folio = Folio(okapi_url = okapi_url,
-              okapi_token = okapi_token,
-              tenant_id = tenant_id)
+folio = Folio(okapi_url     = okapi_url,
+              okapi_token   = okapi_token,
+              tenant_id     = tenant_id,
+              an_prefix     = an_prefix,
+              page_template = page_template)
+
 
 
 def test_folio_different_ids():
@@ -46,6 +53,7 @@ def test_folio_different_ids():
     assert item1.publisher == item2.publisher
     assert item1.details_page == item2.details_page
     assert item1.isbn_issn == item2.isbn_issn
+    assert validators.url(item1.details_page)
 
 
 def test_folio_field_values1():
