@@ -21,7 +21,7 @@ file "LICENSE" for more information.
 #  |    by the Makefile. Manual changes to these values will be lost.      |
 #  ╰────────────────────── Notice ── Notice ── Notice ─────────────────────╯
 
-__version__     = '0.0.1'
+__version__     = '0.0.2'
 __description__ = 'Python package for getting basic data from a FOLIO LSP server'
 __url__         = 'https://github.com/caltechlibrary/pokapi'
 __author__      = 'Michael Hucka'
