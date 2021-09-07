@@ -61,7 +61,7 @@ class FolioRecord():
 
 
     def __str__(self):
-        info = f' {self.folio_id}' if self.folio_id else ''
+        info = f' {self.id}' if self.id else ''
         return f'FolioRecord{info}'
 
 
@@ -90,22 +90,22 @@ class FolioRecord():
 
 
     def __lt__(self, other):
-        return self.folio_id < other.folio_id
+        return self.id < other.id
 
 
     def __gt__(self, other):
         if isinstance(other, type(self)):
-            return other.folio_id < self.folio_id
+            return other.id < self.id
         return NotImplemented
 
 
     def __le__(self, other):
         if isinstance(other, type(self)):
-            return not other.folio_id < self.folio_id
+            return not other.id < self.id
         return NotImplemented
 
 
     def __ge__(self, other):
         if isinstance(other, type(self)):
-            return not self.folio_id < other.folio_id
+            return not self.id < other.id
         return NotImplemented
