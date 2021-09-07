@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+from   decouple import config
 import os
 import pytest
 import sys
+import warnings
 
 try:
     thisdir = os.path.dirname(os.path.abspath(__file__))
@@ -10,9 +12,13 @@ try:
 except:
     sys.path.append('..')
 
-from decouple import config
-
 from pokapi import Folio, FolioRecord
+
+# Decouple version 3.4 has an issue with using a deprecated method from
+# ConfigParser. There's a PR in limbo at
+# https://github.com/henriquebastos/python-decouple/pull/93
+# Until the issue is fixed, let's do this.
+warnings.filterwarnings("ignore", category = DeprecationWarning)
 
 # These can be set as environment variables or written in a file called
 # settings.ini in this directory.
