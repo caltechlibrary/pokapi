@@ -41,14 +41,30 @@ python3 -m pip install git+https://github.com/caltechlibrary/pokapi.git
 
 ## Usage
 
-Pokapi currently provides a basic interface to retrieve records using identifiers that can be FOLIO instance identifiers, item barcodes, or EDS accession numbers. To use Pokapi, first create a `Folio` object with parameters that provide the Okapi URL for your instance, an Okapi API token, and a tenant id.  Assuming that the values are stored in separate variables named `the_okapi_url`, `the_okapi_token`, and `the_tenant_id`, the following code will create a `Folio` object:
+The use of Pokapi is straightfoward. First, callers must create one instance of a `Folio` object that defines various aspects of how to communicate with their FOLIO/Okapi system. Then, callers can use the `record(...)` method on that `Folio` object to get objects that represent records in their FOLIO system. The method only requires an identifier, which can be a FOLIO instance identifier, an item barcode, or an EDS accession number. More details about all of this are provided below.
+
+
+### The `Folio` interface object
+
+To use Pokapi, first create a `Folio` object with parameters that define certain things Pokapi can't get on its own. These are: the the Okapi URL for your instance, an Okapi API token, a tenant id, the prefix that appears in front of your accession numbers, and a template for creating URLs that go to the Detailed Record page for an item in EDS.  Assuming that these values are stored in separate variables, the following code will create a `Folio` object:
 ```python
-from pokapi import Folio, FolioRecord
+from pokapi import Folio
 
 folio = Folio(okapi_url = the_okapi_url,
               okapi_token = the_okapi_token,
-              tenant_id = the_tenant_id)
+              tenant_id = the_tenant_id,
+              an_prefix = the_accession_number_prefix,
+              page_template = the_detailed_record_url_template)
 ```
+
+As an example of a prefix for accession numbers, for Caltech the prefix is the `clc` part of an accession number such as `clc.025d49d5.735a.4d79.8889.c5895ac65fd2`.  The "page template" needs to be a URL that contains the character string `{accession_number}` somewhere within it; this character string will be replaced with an accession number to generate the final URL for the details page of an item returned by the `record(...)` method described below.  An example of a page template for Caltech is the following:
+
+```
+https://caltech.idm.oclc.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=cat08655a&site=eds-live&scope=site&AN={accession_number}
+```
+
+
+### The `record(...)` method
 
 The `Folio` class has only one method on it currently: `record(...)`. This method contacts the FOLIO server to obtain data and returns a `FolioRecord` object with the data stored in fields. The following fields are implemented at this time:
 
@@ -60,8 +76,8 @@ The `Folio` class has only one method on it currently: `record(...)`. This metho
 | `author`        | string | Author; multiple authors are separated by "and" |
 | `publisher`     | string | Publisher |
 | `year`          | string | Year of publication |
+| `edition`       | string | the edition of the work (if any) |
 | `isbn_issn`     | string | ISBN or ISSN |
-| `thumbnail_url` | string | URL for a cover image |
 
 The method `Folio.record(...)` can take any one of the following mutually-exclusive keyword arguments to identify the record to be retrieved:
 
@@ -87,7 +103,7 @@ assert r.publisher == "The Pennsylvania State University Press"
 The following are known limitations at this time:
 
 * If a record has multiple publishers, only the first publisher name is retrieved.
-* Thumbnail images are obtained by searching non-EDS sources, and consequently, the image retrieved may not be the same as what EDS shows for the record.
+* The title is extracted from the instance record's `title` field, but because (at least in our catalog) the title contains both a title and author info, Pokapi has to use heuristics to extract out just the title from the string. The heuristics might fail in some cases, especially if your installation of FOLIO uses different conventions for formatting the `title` field.
 
 
 ## Getting help
@@ -116,6 +132,8 @@ Pokapi makes use of numerous open-source packages, without which Pokapi could no
 * [lxml](https://lxml.de) &ndash; an XML parsing library for Python
 * [Python Decouple](https://github.com/henriquebastos/python-decouple/) &ndash; a high-level configuration file interface
 * [setuptools](https://github.com/pypa/setuptools) &ndash; library for `setup.py`
+* [uritemplate](https://github.com/python-hyper/uritemplate) &ndash; URI template parsing per RFC&nbsp;6570
+* [validators](https://github.com/kvesteri/validators) &ndash; Python data validation for Humans
 * [Sidetrack](https://github.com/caltechlibrary/sidetrack) &ndash; simple debug logging/tracing package
 
 <div align="center">
