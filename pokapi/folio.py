@@ -27,7 +27,6 @@ if __debug__:
 
 from .exceptions import *
 from .record import FolioRecord
-from .thumbnail import thumbnail_url_for_pub
 
 
 # Internal constants.
@@ -103,10 +102,11 @@ class Folio():
                 else:
                     raise FolioError('Unexpected data returned by FOLIO')
             elif data_dict['totalRecords'] == 0:
-                if __debug__: log(f'got empty response for {request_url}')
+                if __debug__: log(f'got 0 records for {request_url}')
                 return None
             elif data_dict['totalRecords'] > 1:
-                if __debug__: log(f'got multiple responses for {request_url}')
+                total = data_dict['totalRecords']
+                if __debug__: log(f'got {total} records for {request_url}')
                 if __debug__: log(f'using only first value')
             return data_dict['instances'][0]
 
@@ -122,7 +122,6 @@ class Folio():
                            publisher     = publisher(json_dict['publication']),
                            edition       = pub_edition(json_dict['editions']),
                            details_page  = details_page(instance_id),
-                           thumbnail_url = thumbnail_url_for_pub(isbn_issn),
                            _raw_data     = json_dict)
 
 

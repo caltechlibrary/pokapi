@@ -44,7 +44,6 @@ class FolioRecord():
         'edition'       : str,          # editions[0]
         'year'          : str,          # publication.year
         'isbn_issn'     : str,          #
-        'thumbnail_url' : str,          #
     }
 
 
