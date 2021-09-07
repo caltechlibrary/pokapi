@@ -30,7 +30,8 @@ class FolioRecord():
     "instance" records. The "id" is the instance id.
 
     Some field values may be empty strings, depending on the record. For
-    example, journals will not have a "year" value.
+    example, journals will not have a "year" value, so the value of that field
+    will be '' for journals.
     '''
 
     # The reason for an explicit list of fields here is so that we can use it
@@ -60,8 +61,8 @@ class FolioRecord():
 
 
     def __str__(self):
-        details = f' {self.folio_id}' if self.folio_id else ''
-        return f'FolioRecord{details}'
+        info = f' {self.folio_id}' if self.folio_id else ''
+        return f'FolioRecord{info}'
 
 
     def __repr__(self):
