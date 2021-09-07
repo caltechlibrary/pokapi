@@ -21,6 +21,7 @@ from   commonpy.network_utils import net
 import json
 from   json import JSONDecodeError
 import re
+from   uritemplate import expand as expanded
 
 if __debug__:
     from sidetrack import log
@@ -41,9 +42,6 @@ _MAX_SLEEP_CYCLES = 8
 _INSTANCE_FOR_BARCODE = '{}/inventory/instances?query=item.barcode%3D%3D{}'
 _INSTANCE_FOR_INSTANCE_ID = '{}/instance-storage/instances/{}'
 
-# URL template for a link to the Detailed Record page in EDS.
-_DETAILS_PAGE_FOR_AN = 'https://caltech.idm.oclc.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=cat08655a&AN={}&site=eds-live&scope=site'
-
 # Type identifiers for some things we look for.
 _TYPE_ID_ISBN = '8261054f-be78-422d-bd51-4ed9f33c3422'
 _TYPE_ID_ISSN = '913300b2-03ed-469a-8179-c1092c991227'
@@ -55,11 +53,13 @@ _TYPE_ID_ISSN = '913300b2-03ed-469a-8179-c1092c991227'
 class Folio():
     '''Interface to a FOLIO server using Okapi.'''
 
-    def __init__(self, okapi_url, okapi_token, tenant_id):
+    def __init__(self, okapi_url, okapi_token, tenant_id, an_prefix, page_template):
         '''Create an interface to the Folio server at "okapi_url".'''
         self.okapi_url = okapi_url
         self.okapi_token = okapi_token
         self.tenant_id = tenant_id
+        self.an_prefix = an_prefix
+        self.page_template = page_template
 
 
     def record(self, barcode = None, accession_number = None, instance_id = None):
@@ -114,15 +114,19 @@ class Folio():
         json_dict = self._result_from_api(request_url, response_handler)
         instance_id = json_dict['id']
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
-        return FolioRecord(id            = instance_id,
-                           title         = pub_title(json_dict['title']),
-                           author        = pub_authors(json_dict['contributors']),
-                           year          = pub_year(json_dict['publication']),
-                           isbn_issn     = isbn_issn,
-                           publisher     = publisher(json_dict['publication']),
-                           edition       = pub_edition(json_dict['editions']),
-                           details_page  = details_page(instance_id),
-                           _raw_data     = json_dict)
+        an = self.accession_number_from_id(instance_id)
+        details_page = expanded(self.page_template, accession_number = an)
+        rec = FolioRecord(id           = instance_id,
+                          title        = pub_title(json_dict['title']),
+                          author       = pub_authors(json_dict['contributors']),
+                          year         = pub_year(json_dict['publication']),
+                          isbn_issn    = isbn_issn,
+                          publisher    = publisher(json_dict['publication']),
+                          edition      = pub_edition(json_dict['editions']),
+                          details_page = details_page,
+                          _raw_data    = json_dict)
+        log(f'created {rec}')
+        return rec
 
 
     def _result_from_api(self, url, result_producer, retry = 0):
@@ -152,6 +156,10 @@ class Folio():
         else:
             raise FolioError(f'Problem contacting {url}: {antiformat(error)}')
 
+
+    def accession_number_from_id(self, instance_id):
+        return self.an_prefix + '.' + instance_id.replace('-', '.')
+
 
 # Miscellaneous helpers.
 # .............................................................................
@@ -162,6 +170,7 @@ def cleaned(text):
         return text
     text = text.rstrip('./')
     return text.strip()
+
 
 def pub_year(publication_list):
     if publication_list:
@@ -208,10 +217,6 @@ def pub_edition(editions):
     return ''
 
 
-def details_page(instance_id):
-    return _DETAILS_PAGE_FOR_AN.format(an_from_id(instance_id))
-
-
 def isbn_issn_from_identifiers(id_list):
     value_string = ''
     for entry in id_list:
@@ -232,10 +237,6 @@ def id_from_an(accession_number):
     start = accession_number.find('.')
     id_part = accession_number[start + 1:]
     return id_part.replace('.', '-')
-
-
-def an_from_id(instance_id):
-    return 'clc.' + instance_id.replace('-', '.')
 
 
 def parsed_title_and_author(text):
