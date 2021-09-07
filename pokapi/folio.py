@@ -158,7 +158,11 @@ class Folio():
 
 
     def accession_number_from_id(self, instance_id):
-        return self.an_prefix + '.' + instance_id.replace('-', '.')
+        if self.an_prefix.endswith('.'):
+            prefix = self.an_prefix
+        else:
+            prefix = self.an_prefix + '.'
+        return prefix + instance_id.replace('-', '.')
 
 
 # Miscellaneous helpers.
