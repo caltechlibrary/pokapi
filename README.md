@@ -4,6 +4,9 @@ Pokapi (_Python Okapi Interface_)  is a Python package for getting basic data fr
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://choosealicense.com/licenses/bsd-3-clause)
 [![Latest release](https://img.shields.io/github/v/release/caltechlibrary/pokapi.svg?style=flat-square&color=b44e88)](https://github.com/caltechlibrary/pokapi/releases)
+[![DOI](https://img.shields.io/badge/dynamic/json.svg?label=DOI&style=flat-square&colorA=gray&colorB=navy&query=$.metadata.doi&uri=https://data.caltech.edu/api/record/2108)](https://data.caltech.edu/records/2108)
+[![Python](https://img.shields.io/badge/Python-3.6+-brightgreen.svg?style=flat-square)](http://shields.io)
+[![PyPI](https://img.shields.io/pypi/v/pokapi.svg?style=flat-square&color=orange)](https://pypi.org/project/pokapi/)
 
 
 ## Table of contents
@@ -113,7 +116,7 @@ If you find an issue, please submit it in [the GitHub issue tracker](https://git
 
 ## Contributing
 
-We would be happy to receive your help and participation with enhancing Topi!  Please visit the [guidelines for contributing](CONTRIBUTING.md) for some tips on getting started.
+We would be happy to receive your help and participation with enhancing Pokapi!  Please visit the [guidelines for contributing](CONTRIBUTING.md) for some tips on getting started.
 
 
 ## License
