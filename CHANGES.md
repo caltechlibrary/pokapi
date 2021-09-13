@@ -1,5 +1,14 @@
 # Change log for Pokapi
 
+## Version 0.1.0
+
+This release includes breaking changes to the API:
+* The parameter `page_template` is gone from the `Folio` object.
+* The field `details_page` is gone from the `FolioRecord` object.
+
+These changes were made after the realization that the record pages were not a concept of FOLIO or Okapi, but rather of the discovery system, and thus they don't belong in Pokapi.
+
+
 ## Version 0.0.2
 
 * Added more parameters to `Folio` interface object in order to avoid hardwiring Caltech-specific things into the code.
