@@ -53,21 +53,20 @@ _TYPE_ID_ISSN = '913300b2-03ed-469a-8179-c1092c991227'
 class Folio():
     '''Interface to a FOLIO server using Okapi.'''
 
-    def __init__(self, okapi_url, okapi_token, tenant_id, an_prefix, page_template):
+    def __init__(self, okapi_url, okapi_token, tenant_id, an_prefix):
         '''Create an interface to the Folio server at "okapi_url".'''
         self.okapi_url = okapi_url
         self.okapi_token = okapi_token
         self.tenant_id = tenant_id
         self.an_prefix = an_prefix
-        self.page_template = page_template
 
 
     def record(self, barcode = None, accession_number = None, instance_id = None):
         '''Create a FolioRecord object given a barcode, accession number, or
         instance id.  The arguments are mutually exclusive.
 
-        This contacts the FOLIO server and perform a search using the given,
-        field value, then creates a FolioRecord object and returns it.  If
+        This contacts the FOLIO server and perform a search using the given
+        identifier, then creates a FolioRecord object and returns it.  If
         the FOLIO server does not return a result, this method raises a
         NotFound exception.
 
@@ -112,19 +111,18 @@ class Folio():
 
         request_url = url_template.format(self.okapi_url, identifier)
         json_dict = self._result_from_api(request_url, response_handler)
-        instance_id = json_dict['id']
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
-        an = self.accession_number_from_id(instance_id)
-        details_page = expanded(self.page_template, accession_number = an)
-        rec = FolioRecord(id           = instance_id,
-                          title        = pub_title(json_dict['title']),
-                          author       = pub_authors(json_dict['contributors']),
-                          year         = pub_year(json_dict['publication']),
-                          isbn_issn    = isbn_issn,
-                          publisher    = publisher(json_dict['publication']),
-                          edition      = pub_edition(json_dict['editions']),
-                          details_page = details_page,
-                          _raw_data    = json_dict)
+        instance_id = json_dict['id']
+        accession_number = self.accession_number_from_id(instance_id)
+        rec = FolioRecord(id               = instance_id,
+                          accession_number = accession_number,
+                          isbn_issn        = isbn_issn,
+                          title            = pub_title(json_dict['title']),
+                          author           = pub_authors(json_dict['contributors']),
+                          year             = pub_year(json_dict['publication']),
+                          publisher        = publisher(json_dict['publication']),
+                          edition          = pub_edition(json_dict['editions']),
+                          _raw_data        = json_dict)
         log(f'created {rec}')
         return rec
 
