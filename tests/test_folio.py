@@ -6,7 +6,6 @@ import pytest
 import sys
 import warnings
 import uritemplate
-import validators
 
 try:
     thisdir = os.path.dirname(os.path.abspath(__file__))
@@ -27,8 +26,6 @@ warnings.filterwarnings("ignore", category = DeprecationWarning)
 okapi_url     = config('OKAPI_URL')
 okapi_token   = config('OKAPI_TOKEN')
 tenant_id     = config('TENANT_ID')
-an_prefix     = config('AN_PREFIX')
-page_template = config('PAGE_TEMPLATE')
 
 # We can't go on without these values
 if not all([okapi_url, okapi_token, tenant_id]):
@@ -38,22 +35,20 @@ if not all([okapi_url, okapi_token, tenant_id]):
 folio = Folio(okapi_url     = okapi_url,
               okapi_token   = okapi_token,
               tenant_id     = tenant_id,
-              an_prefix     = an_prefix,
-              page_template = page_template)
-
+              an_prefix     = 'clc')
 
 
 def test_folio_different_ids():
     item1 = folio.record(barcode = "35047019531631")
     item2 = folio.record(instance_id = "1fedf5f3-b631-4d34-8d40-e022f70ab232")
     assert item1.id == item2.id
+    assert item1.accession_number == item2.accession_number
+    assert item1.accession_number == "clc.1fedf5f3.b631.4d34.8d40.e022f70ab232"
     assert item1.title == item2.title
     assert item1.author == item2.author
     assert item1.year == item2.year
     assert item1.publisher == item2.publisher
-    assert item1.details_page == item2.details_page
     assert item1.isbn_issn == item2.isbn_issn
-    assert validators.url(item1.details_page)
 
 
 def test_folio_field_values1():
