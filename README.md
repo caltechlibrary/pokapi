@@ -49,44 +49,39 @@ The use of Pokapi is straightfoward. First, callers must create one instance of 
 
 ### The `Folio` interface object
 
-To use Pokapi, first create a `Folio` object with parameters that define certain things Pokapi can't get on its own. These are: the the Okapi URL for your instance, an Okapi API token, a tenant id, the prefix that appears in front of your accession numbers, and a template for creating URLs that go to the Detailed Record page for an item in EDS.  Assuming that these values are stored in separate variables, the following code will create a `Folio` object:
+To use Pokapi, first create a `Folio` object with parameters that define certain things Pokapi can't get on its own. These are: the the Okapi URL for your instance, an Okapi API token, a tenant id, and the prefix that appears in front of your accession numbers.  Assuming that these values are stored in separate variables, the following code illustrates how to create a `Folio` object:
 ```python
 from pokapi import Folio
 
 folio = Folio(okapi_url = the_okapi_url,
               okapi_token = the_okapi_token,
               tenant_id = the_tenant_id,
-              an_prefix = the_accession_number_prefix,
-              page_template = the_detailed_record_url_template)
+              an_prefix = the_accession_number_prefix)
 ```
 
-As an example of a prefix for accession numbers, for Caltech the prefix is the `clc` part of an accession number such as `clc.025d49d5.735a.4d79.8889.c5895ac65fd2`.  The "page template" needs to be a URL that contains the character string `{accession_number}` somewhere within it; this character string will be replaced with an accession number to generate the final URL for the details page of an item returned by the `record(...)` method described below.  An example of a page template for Caltech is the following:
-
-```
-https://caltech.idm.oclc.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=cat08655a&site=eds-live&scope=site&AN={accession_number}
-```
+As an example of a prefix for accession numbers, for Caltech the prefix is the `clc` part of an accession number such as `clc.025d49d5.735a.4d79.8889.c5895ac65fd2`. 
 
 
 ### The `record(...)` method
 
 The `Folio` class has only one method on it currently: `record(...)`. This method contacts the FOLIO server to obtain data and returns a `FolioRecord` object with the data stored in fields. The following fields are implemented at this time:
 
-| Field           | Type   | Meaning |
-|-----------------|--------|---------|
-| `id`            | string | FOLIO instance record identifier |
-| `details_page`  | string | URL for _Detailed Record_ page in EDS |
-| `title`         | string | Title of the work |
-| `author`        | string | Author; multiple authors are separated by "and" |
-| `publisher`     | string | Publisher |
-| `year`          | string | Year of publication |
-| `edition`       | string | the edition of the work (if any) |
-| `isbn_issn`     | string | ISBN or ISSN |
+| Field              | Type   | Meaning |
+|--------------------|--------|---------|
+| `id`               | string | FOLIO instance record identifier |
+| `accession_number` | string | The accession number for the record |
+| `title`            | string | Title of the work |
+| `author`           | string | Author; multiple authors are separated by "and" |
+| `publisher`        | string | Publisher |
+| `year`             | string | Year of publication |
+| `edition`          | string | the edition of the work (if any) |
+| `isbn_issn`        | string | ISBN or ISSN |
 
 The method `Folio.record(...)` can take any one of the following mutually-exclusive keyword arguments to identify the record to be retrieved:
 
 * `barcode`: retrieve the record corresponding to the given item barcode
 * `instance_id`: retrieve the record having the given FOLIO instance identifier
-* `accession_number`: retrieve the record corresponding to the accession number in EDS
+* `accession_number`: retrieve the record corresponding to the accession number
 
 Here is an example of using the method:
 
