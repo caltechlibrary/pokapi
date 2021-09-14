@@ -1,5 +1,10 @@
 # Change log for Pokapi
 
+## Version 0.2.0
+
+This release changes the parsing of authors to use the text that appears in the `title` field of the Folio record instead of the contributors list field.
+
+
 ## Version 0.1.0
 
 This release includes breaking changes to the API:
