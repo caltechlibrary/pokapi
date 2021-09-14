@@ -20,7 +20,7 @@ from   commonpy.string_utils import antiformat
 from   commonpy.network_utils import net
 import json
 from   json import JSONDecodeError
-import re
+import regex
 from   uritemplate import expand as expanded
 
 if __debug__:
@@ -90,6 +90,7 @@ class Folio():
     def _record_from_server(self, url_template, identifier):
         def response_handler(resp):
             if not resp or not resp.text:
+                if __debug__: log(f'FOLIO returned no result for {request_url}')
                 return None
             data_dict = json.loads(resp.text)
             # Depending on the way we're getting it, the record might be
@@ -111,14 +112,17 @@ class Folio():
 
         request_url = url_template.format(self.okapi_url, identifier)
         json_dict = self._result_from_api(request_url, response_handler)
+        if not json_dict:
+            return FolioRecord()
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
         instance_id = json_dict['id']
         accession_number = self.accession_number_from_id(instance_id)
+        title, author = parsed_title_and_author(json_dict['title'])
         rec = FolioRecord(id               = instance_id,
                           accession_number = accession_number,
                           isbn_issn        = isbn_issn,
-                          title            = pub_title(json_dict['title']),
-                          author           = pub_authors(json_dict['contributors']),
+                          title            = cleaned(title),
+                          author           = cleaned(author),
                           year             = pub_year(json_dict['publication']),
                           publisher        = publisher(json_dict['publication']),
                           edition          = pub_edition(json_dict['editions']),
@@ -189,28 +193,32 @@ def publisher(publication_list):
         return ''
 
 
+# Currently not used.
 def pub_title(title_string):
     title, author = parsed_title_and_author(title_string)
     return cleaned(title)
 
 
-def pub_authors(contributors_list):
+# Currently not used.
+def pub_authors(contributors):
     # We can either get the authors from the title string, or the Folio field
     # named "contributors".  Currently I'm using the contributors list in
     # part because the authors' names are put in a more consistent format
     # of "last name, first name".  However, there's additional stuff in the
-    # author data that we want to remove.
-    name_and_comment = re.compile(r'[^(]+?\(')
+    # author data that we want to remove.  That's the business with the regex.
+
     def extracted_name(field):
         author = field['name']
-        matched = name_and_comment.match(author)
+        matched = regex.match(r'[-.,\p{L} ]+', author)
         if matched:
-            end = matched.end() - 1
-            return author[:end].strip()
+            return matched.group().strip(' ,')
         else:
             return author
 
-    return ' and '.join(extracted_name(author) for author in contributors_list)
+    # Handle special case of et al.
+    if len(contributors) == 1 and not contributors[0]['primary']:
+        return extracted_name(contributors[0]) + ' et al.'
+    return ' and '.join(extracted_name(author) for author in contributors)
 
 
 def pub_edition(editions):
@@ -248,7 +256,7 @@ def parsed_title_and_author(text):
     if text.find('/') > 0:
         start = text.find('/')
         title = text[:start].strip()
-        author = text[start + 3:].strip()
+        author = text[start + 2:].strip()
     elif text.find('[by]') > 0:
         start = text.find('[by]')
         title = text[:start].strip()
@@ -261,4 +269,7 @@ def parsed_title_and_author(text):
         title = text
     if title.endswith(':'):
         title = title[:-1].strip()
+    if author and author.startswith('edited by'):
+        start = author.find('edited by')
+        author = author[start + 9:].strip()
     return title, author
