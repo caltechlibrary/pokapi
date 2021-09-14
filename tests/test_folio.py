@@ -56,7 +56,7 @@ def test_folio_field_values1():
     assert r.id == "1fedf5f3-b631-4d34-8d40-e022f70ab232"
     assert r.title == "The bad doctor"
     assert r.year == "2015"
-    assert r.author == "Williams, Ian"
+    assert r.author == "Ian Williams"
     assert r.isbn_issn == "9780271067544"
     assert r.publisher == "The Pennsylvania State University Press"
 
@@ -68,3 +68,32 @@ def test_folio_field_values2():
     assert r.year == ""
     assert r.isbn_issn == "1522-9610"
     assert r.publisher == "Academic Press"
+
+
+def test_folio_field_bad_values():
+    r = folio.record(accession_number = "35047019077825")
+    assert r == FolioRecord()
+    r = folio.record(barcode = "")
+    assert r == FolioRecord()
+
+
+def test_folio_field_values3():
+    r = folio.record(barcode = "35047019547967")
+    assert r.author == "Eric R. Kandel ... [et al.] ; art editor, Sarah Mack"
+    assert r.details_page == ""
+    assert r.edition == "5th ed"
+    assert r.id == "01d1d7e2-fcd8-4880-9820-0bba86778e39"
+    assert r.isbn_issn == "0071390111"
+    assert r.publisher == "McGraw-Hill"
+    assert r.title == "Principles of neural science"
+    assert r.year == "2013"
+
+
+def test_folio_field_values4():
+    r = folio.record(barcode = "35047019466119")
+    assert r.author == "Bruce Alberts, Alexander Johnson, Julian Lewis, David Morgan, Martin Raff, Keith Roberts, Peter Walter ; with problems by John Wilson, Tim Hunt"
+    assert r.details_page == ""
+    assert r.edition == "Sixth edition"
+    assert r.id == "307560df-3464-41fe-89df-4b09f65d7c3b"
+    assert r.isbn_issn == "9780815344322"
+
