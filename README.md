@@ -123,6 +123,8 @@ Software produced by the Caltech Library is Copyright © 2021 California Institu
 
 This work was funded by the California Institute of Technology Library.
 
+The [vector artwork](https://thenounproject.com/term/okapi-face/1546683/) of the face of an okapi, used as the icon for this project, was created by [Icons Producer](https://thenounproject.com/iconsproducer/) from the Noun Project.  It is licensed under the Creative Commons [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
+
 Pokapi makes use of numerous open-source packages, without which Pokapi could not have been developed.  I want to acknowledge this debt.  In alphabetical order, the packages are:
 
 * [CommonPy](https://github.com/caltechlibrary/commonpy) &ndash; a collection of commonly-useful Python functions
