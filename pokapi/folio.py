@@ -118,6 +118,8 @@ class Folio():
         instance_id = json_dict['id']
         accession_number = self.accession_number_from_id(instance_id)
         title, author = parsed_title_and_author(json_dict['title'])
+        if not author:
+            author = pub_authors(json_dict['contributors'])
         rec = FolioRecord(id               = instance_id,
                           accession_number = accession_number,
                           isbn_issn        = isbn_issn,
@@ -199,16 +201,10 @@ def pub_title(title_string):
     return cleaned(title)
 
 
-# Currently not used.
 def pub_authors(contributors):
-    # We can either get the authors from the title string, or the Folio field
-    # named "contributors".  Currently I'm using the contributors list in
-    # part because the authors' names are put in a more consistent format
-    # of "last name, first name".  However, there's additional stuff in the
-    # author data that we want to remove.  That's the business with the regex.
-
     def extracted_name(field):
         author = field['name']
+        # The names have additional trailing stuff that we want to remove.
         matched = regex.match(r'[-.,\p{L} ]+', author)
         if matched:
             return matched.group().strip(' ,')
