@@ -1,5 +1,15 @@
 # Change log for Pokapi
 
+## Version 0.2.1
+
+Fixes in this release:
+
+* Fix: `Folio.record(...)` is supposed to throw a `NotFound` exception if it can't find the requested item. (It was returning a blank `FolioRecord` object.)
+* Fix: the fields in the definition of `FolioRecord` were out of date with the most recent code and documentation.
+* Fix: use a fallback method to get the author names from the title string instead of setting it to `None`.
+* Add acknowledgment for the artwork used for the icon.
+
+
 ## Version 0.2.0
 
 This release changes the parsing of authors to use the text that appears in the `title` field of the Folio record instead of the contributors list field.
