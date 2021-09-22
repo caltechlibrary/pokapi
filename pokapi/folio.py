@@ -113,7 +113,7 @@ class Folio():
         request_url = url_template.format(self.okapi_url, identifier)
         json_dict = self._result_from_api(request_url, response_handler)
         if not json_dict:
-            return FolioRecord()
+            raise NotFound(f'Could not find a record for {identifier}')
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
         instance_id = json_dict['id']
         accession_number = self.accession_number_from_id(instance_id)
