@@ -95,3 +95,4 @@ __pycache__
 tests/settings.ini
 .*.md.tmp
 dist/*
+build/*
