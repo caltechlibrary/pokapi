@@ -40,10 +40,10 @@ folio = Folio(okapi_url     = okapi_url,
 
 def test_folio_different_ids():
     item1 = folio.record(barcode = "35047019531631")
-    item2 = folio.record(instance_id = "1fedf5f3-b631-4d34-8d40-e022f70ab232")
+    item2 = folio.record(instance_id = "7ef573ae-6489-4321-9555-6baf0bec365a")
     assert item1.id == item2.id
     assert item1.accession_number == item2.accession_number
-    assert item1.accession_number == "clc.1fedf5f3.b631.4d34.8d40.e022f70ab232"
+    assert item1.accession_number == "clc.7ef573ae.6489.4321.9555.6baf0bec365a"
     assert item1.title == item2.title
     assert item1.author == item2.author
     assert item1.year == item2.year
@@ -53,7 +53,7 @@ def test_folio_different_ids():
 
 def test_folio_field_values1():
     r = folio.record(barcode = "35047019531631")
-    assert r.id == "1fedf5f3-b631-4d34-8d40-e022f70ab232"
+    assert r.id == "7ef573ae-6489-4321-9555-6baf0bec365a"
     assert r.title == "The bad doctor"
     assert r.year == "2015"
     assert r.author == "Ian Williams"
@@ -62,8 +62,8 @@ def test_folio_field_values1():
 
 
 def test_folio_field_values2():
-    r = folio.record(accession_number = "clc.3d7bea51.8ed5.4b82.9a93.87f3b4e42374")
-    assert r.id == "3d7bea51-8ed5-4b82-9a93-87f3b4e42374"
+    r = folio.record(accession_number = "clc.4580395b.b026.48da.8f5a.63a2c1623787")
+    assert r.id == "4580395b-b026-48da-8f5a-63a2c1623787"
     assert r.title == "Journal of environmental psychology [electronic resource]"
     assert r.year == ""
     assert r.isbn_issn == "1522-9610"
@@ -71,8 +71,15 @@ def test_folio_field_values2():
 
 
 def test_folio_field_bad_values():
-    r = folio.record(accession_number = "35047019077825")
-    assert r == FolioRecord()
+    got_exception = False
+    try:
+        r = folio.record(accession_number = "35047019077825")
+    except Exception as ex:
+        got_exception = True
+    assert got_exception
+
+
+def test_folio_field_empty_value():
     r = folio.record(barcode = "")
     assert r == FolioRecord()
 
@@ -80,9 +87,8 @@ def test_folio_field_bad_values():
 def test_folio_field_values3():
     r = folio.record(barcode = "35047019547967")
     assert r.author == "Eric R. Kandel ... [et al.] ; art editor, Sarah Mack"
-    assert r.details_page == ""
     assert r.edition == "5th ed"
-    assert r.id == "01d1d7e2-fcd8-4880-9820-0bba86778e39"
+    assert r.id == "6b2826e0-e5b2-406e-9b95-398418136fbd"
     assert r.isbn_issn == "0071390111"
     assert r.publisher == "McGraw-Hill"
     assert r.title == "Principles of neural science"
@@ -92,8 +98,6 @@ def test_folio_field_values3():
 def test_folio_field_values4():
     r = folio.record(barcode = "35047019466119")
     assert r.author == "Bruce Alberts, Alexander Johnson, Julian Lewis, David Morgan, Martin Raff, Keith Roberts, Peter Walter ; with problems by John Wilson, Tim Hunt"
-    assert r.details_page == ""
     assert r.edition == "Sixth edition"
-    assert r.id == "307560df-3464-41fe-89df-4b09f65d7c3b"
+    assert r.id == "f47c86ff-54e5-41e6-94e1-3094630810ba"
     assert r.isbn_issn == "9780815344322"
-
