@@ -37,14 +37,14 @@ class FolioRecord():
     # The reason for an explicit list of fields here is so that we can use it
     # in the definition of __repr__().
     __fields = {
-        'id'            : str,          # id of Folio instance record
-        'details_page'  : str,          # URL to page in EDS
-        'title'         : str,          # extracted from instance "title" field
-        'author'        : str,          # string concatenated from contributors
-        'publisher'     : str,          # publication.publisher
-        'edition'       : str,          # editions[0]
-        'year'          : str,          # publication.year
-        'isbn_issn'     : str,          #
+        'id'               : str,          # id of Folio instance record
+        'accession_number' : str,          # accession number
+        'title'            : str,          # extracted from instance "title" field
+        'author'           : str,          # string concatenated from contributors
+        'publisher'        : str,          # publication.publisher
+        'edition'          : str,          # editions[0]
+        'year'             : str,          # publication.year
+        'isbn_issn'        : str,          #
     }
 
 
