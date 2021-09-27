@@ -123,8 +123,8 @@ class Folio():
         rec = FolioRecord(id               = instance_id,
                           accession_number = accession_number,
                           isbn_issn        = isbn_issn,
-                          title            = cleaned(title),
-                          author           = cleaned(author),
+                          title            = title,
+                          author           = author,
                           year             = pub_year(json_dict['publication']),
                           publisher        = publisher(json_dict['publication']),
                           edition          = pub_edition(json_dict['editions']),
@@ -249,10 +249,10 @@ def parsed_title_and_author(text):
     '''Extract a title and authors (if present) from the given text string.'''
     title = None
     author = None
-    if text.find('/') > 0:
-        start = text.find('/')
+    if text.find('/ by') > 0:
+        start = text.find('/ by')
         title = text[:start].strip()
-        author = text[start + 2:].strip()
+        author = text[start + 4:].strip()
     elif text.find('[by]') > 0:
         start = text.find('[by]')
         title = text[:start].strip()
@@ -261,6 +261,10 @@ def parsed_title_and_author(text):
         start = text.rfind(', by')
         title = text[:start].strip()
         author = text[start + 5:].strip()
+    elif text.find('/') > 0:
+        start = text.find('/')
+        title = text[:start].strip()
+        author = text[start + 2:].strip()
     else:
         title = text
     if title.endswith(':'):
@@ -268,4 +272,7 @@ def parsed_title_and_author(text):
     if author and author.startswith('edited by'):
         start = author.find('edited by')
         author = author[start + 9:].strip()
-    return title, author
+    if author and author.startswith('by'):   # In case nothing else catches it.
+        start = author.find('by')
+        author = author[start + 2:].strip()
+    return cleaned(title), cleaned(author)
