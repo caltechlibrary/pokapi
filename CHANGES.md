@@ -1,5 +1,14 @@
 # Change log for Pokapi
 
+## Version 0.3.0
+
+Changes in this release:
+
+* Catch another case of authors in titles separated by `/ by`.
+* Support creating `FolioRecord` objects using saved JSON data from FOLIO OKAPI API calls.
+* Rewrite all tests to use saved data instead of calling Caltech's FOLIO API server.
+
+
 ## Version 0.2.1
 
 Fixes in this release:
