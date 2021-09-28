@@ -1,103 +1,108 @@
 #!/usr/bin/env python3
 
 from   decouple import config
-import os
+from   os.path import dirname, join, abspath, exists
 import pytest
 import sys
 import warnings
 import uritemplate
 
-try:
-    thisdir = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(os.path.join(thisdir, '..'))
-except:
-    sys.path.append('..')
+this_dir = dirname(abspath(__file__))
+sys.path.append(join(this_dir, '..'))
+
+data_dir = join(this_dir, 'data')
 
 from pokapi import Folio, FolioRecord
 
-# Decouple version 3.4 has an issue with using a deprecated method from
-# ConfigParser. There's a PR in limbo at
-# https://github.com/henriquebastos/python-decouple/pull/93
-# Until the issue is fixed, let's do this.
-warnings.filterwarnings("ignore", category = DeprecationWarning)
+# In the tests that follow, we don't contact a live Folio server because we
+# would have to hardwire a specific server's credentials in here (e.g.,
+# Caltech), which would be bad.  So instead, we will saved JSON files in the
+# calls, and create a Folio object with fake credential values.
 
-# These can be set as environment variables or written in a file called
-# settings.ini in this directory.
-okapi_url     = config('OKAPI_URL')
-okapi_token   = config('OKAPI_TOKEN')
-tenant_id     = config('TENANT_ID')
-
-# We can't go on without these values
-if not all([okapi_url, okapi_token, tenant_id]):
-    raise RuntimeError('Missing value(s) of needed configuration variables')
-
-# This Folio interface object is used throughout the rest of this file.
-folio = Folio(okapi_url     = okapi_url,
-              okapi_token   = okapi_token,
-              tenant_id     = tenant_id,
+folio = Folio(okapi_url     = "unused url",
+              okapi_token   = "unused token",
+              tenant_id     = "unused tenant id",
               an_prefix     = 'clc')
 
-
-def test_folio_different_ids():
-    item1 = folio.record(barcode = "35047019531631")
-    item2 = folio.record(instance_id = "7ef573ae-6489-4321-9555-6baf0bec365a")
-    assert item1.id == item2.id
-    assert item1.accession_number == item2.accession_number
-    assert item1.accession_number == "clc.7ef573ae.6489.4321.9555.6baf0bec365a"
-    assert item1.title == item2.title
-    assert item1.author == item2.author
-    assert item1.year == item2.year
-    assert item1.publisher == item2.publisher
-    assert item1.isbn_issn == item2.isbn_issn
-
-
-def test_folio_field_values1():
-    r = folio.record(barcode = "35047019531631")
-    assert r.id == "7ef573ae-6489-4321-9555-6baf0bec365a"
-    assert r.title == "The bad doctor"
-    assert r.year == "2015"
-    assert r.author == "Ian Williams"
-    assert r.isbn_issn == "9780271067544"
-    assert r.publisher == "The Pennsylvania State University Press"
-
-
-def test_folio_field_values2():
-    r = folio.record(accession_number = "clc.4580395b.b026.48da.8f5a.63a2c1623787")
-    assert r.id == "4580395b-b026-48da-8f5a-63a2c1623787"
-    assert r.title == "Journal of environmental psychology [electronic resource]"
-    assert r.year == ""
-    assert r.isbn_issn == "1522-9610"
-    assert r.publisher == "Academic Press"
-
-
-def test_folio_field_bad_values():
-    got_exception = False
-    try:
-        r = folio.record(accession_number = "35047019077825")
-    except Exception as ex:
-        got_exception = True
-    assert got_exception
-
+# Right, then, let's get on with testing.
 
 def test_folio_field_empty_value():
     r = folio.record(barcode = "")
     assert r == FolioRecord()
 
 
-def test_folio_field_values3():
-    r = folio.record(barcode = "35047019547967")
-    assert r.author == "Eric R. Kandel ... [et al.] ; art editor, Sarah Mack"
-    assert r.edition == "5th ed"
-    assert r.id == "6b2826e0-e5b2-406e-9b95-398418136fbd"
-    assert r.isbn_issn == "0071390111"
-    assert r.publisher == "McGraw-Hill"
-    assert r.title == "Principles of neural science"
-    assert r.year == "2013"
+def test_saved_json_barcode1():
+    with open(join(data_dir, 'barcode-35047019077817.json'), 'r') as f:
+        raw_json = f.read()
+    r = folio.record(raw_json = raw_json)
+    assert r.accession_number == "clc.4f114d62.90b8.4b2b.befb.5d81be6963cc"
+    assert r.id               == "4f114d62-90b8-4b2b-befb-5d81be6963cc"
+    assert r.title            == "Marbles : mania, depression, Michelangelo, and me : a graphic memoir"
+    assert r.author           == "Ellen Forney"
+    assert r.edition          == ""
+    assert r.publisher        == "Gotham Books"
+    assert r.isbn_issn        == "9781592407323"
 
 
-def test_folio_field_values4():
-    r = folio.record(barcode = "35047019466119")
-    assert r.author == "Bruce Alberts, Alexander Johnson, Julian Lewis, David Morgan, Martin Raff, Keith Roberts, Peter Walter ; with problems by John Wilson, Tim Hunt"
-    assert r.edition == "Sixth edition"
-    assert r.id == "f47c86ff-54e5-41e6-94e1-3094630810ba"
-    assert r.isbn_issn == "9780815344322"
+def test_saved_json_barcode2():
+    with open(join(data_dir, 'barcode-35047015251580.json'), 'r') as f:
+        raw_json = f.read()
+    r = folio.record(raw_json = raw_json)
+    assert r.accession_number == "clc.ada3b101.eb41.40ed.b553.4467da58245e"
+    assert r.id               == "ada3b101-eb41-40ed-b553-4467da58245e"
+    assert r.title            == "Spacetime physics : introduction to special relativity"
+    assert r.author           == "Edwin F. Taylor, John Archibald Wheeler"
+    assert r.edition          == "2nd ed"
+    assert r.publisher        == "W.H. Freeman"
+    assert r.isbn_issn        == "0716723271"
+    assert r.year             == "1992"
+
+
+def test_saved_json_barcode3():
+    with open(join(data_dir, 'barcode-35047019547967.json'), 'r') as f:
+        raw_json = f.read()
+    r = folio.record(raw_json = raw_json)
+    assert r.accession_number == "clc.6b2826e0.e5b2.406e.9b95.398418136fbd"
+    assert r.id               == "6b2826e0-e5b2-406e-9b95-398418136fbd"
+    assert r.title            == "Principles of neural science"
+    assert r.author           == "Eric R. Kandel ... [et al.] ; art editor, Sarah Mack"
+    assert r.edition          == "5th ed"
+    assert r.publisher        == "McGraw-Hill"
+    assert r.isbn_issn        == "0071390111"
+    assert r.year             == "2013"
+
+
+def test_saved_json_barcode4():
+    with open(join(data_dir, 'barcode-35047019621192.json'), 'r') as f:
+        raw_json = f.read()
+    r = folio.record(raw_json = raw_json)
+    assert r.accession_number == "clc.a56d6be1.3e59.4133.9228.515fb2dead2d"
+    assert r.id               == "a56d6be1-3e59-4133-9228-515fb2dead2d"
+    assert r.title            == "Principles of cognitive neuroscience"
+    assert r.author           == "Dale Purves ... [et al.]"
+    assert r.edition          == "2nd ed"
+    assert r.publisher        == "Sinauer Associates"
+    assert r.isbn_issn        == "0878935738"
+    assert r.year             == "2013"
+
+
+def test_saved_json_an1():
+    with open(join(data_dir, 'instanceid-a6a62669-6d1a-4e90-b9e0-2a029505b2ad.json'), 'r') as f:
+        raw_json = f.read()
+    r = folio.record(raw_json = raw_json)
+    assert r.accession_number == "clc.a6a62669.6d1a.4e90.b9e0.2a029505b2ad"
+    assert r.id               == "a6a62669-6d1a-4e90-b9e0-2a029505b2ad"
+    assert r.title            == "Investments"
+    assert r.author           == "Zvi Bodie, Boston University, Alex Kane, University of California, San Diego, Alan J. Marcus, Boston College"
+    assert r.edition          == "Eleventh edition"
+    assert r.publisher        == "McGraw-Hill Education"
+    assert r.isbn_issn        == "9781259277177"
+    assert r.year             == "2018"
+
+
+def test_raw_json_field():
+    with open(join(data_dir, 'instanceid-a6a62669-6d1a-4e90-b9e0-2a029505b2ad.json'), 'r') as f:
+        raw_json = f.read()
+    r1 = folio.record(raw_json = raw_json)
+    r2 = folio.record(raw_json = r1._raw_data)
+    assert r1 == r2

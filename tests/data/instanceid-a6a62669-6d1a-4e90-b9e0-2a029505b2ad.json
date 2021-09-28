@@ -1,0 +1,92 @@
+{
+  "id" : "a6a62669-6d1a-4e90-b9e0-2a029505b2ad",
+  "_version" : 1,
+  "hrid" : "980813",
+  "source" : "MARC",
+  "title" : "Investments / Zvi Bodie, Boston University, Alex Kane, University of California, San Diego, Alan J. Marcus, Boston College.",
+  "indexTitle" : "Investments",
+  "alternativeTitles" : [ ],
+  "editions" : [ "Eleventh edition" ],
+  "series" : [ ],
+  "identifiers" : [ {
+    "value" : "2017013354",
+    "identifierTypeId" : "c858e4f2-2b6b-4385-842b-60732ee14abb"
+  }, {
+    "value" : "9781259277177 (alk. paper)",
+    "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422"
+  }, {
+    "value" : "(CIT)9781259277177",
+    "identifierTypeId" : "7e591197-f335-4afb-bc6d-a6d76ca3bace"
+  }, {
+    "value" : "oai:caltech.tind.io:980813",
+    "identifierTypeId" : "56e2db07-522d-417b-84b4-a78c123a78e5"
+  } ],
+  "contributors" : [ {
+    "name" : "Bodie, Zvi",
+    "contributorTypeId" : "6e09d47d-95e2-4d8a-831b-f777b8ef6d81",
+    "contributorTypeText" : "Contributor",
+    "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+    "primary" : true
+  }, {
+    "name" : "Kane, Alex, 1942-",
+    "contributorTypeId" : "6e09d47d-95e2-4d8a-831b-f777b8ef6d81",
+    "contributorTypeText" : "Contributor",
+    "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+    "primary" : false
+  }, {
+    "name" : "Marcus, Alan J.",
+    "contributorTypeId" : "6e09d47d-95e2-4d8a-831b-f777b8ef6d81",
+    "contributorTypeText" : "Contributor",
+    "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+    "primary" : false
+  } ],
+  "subjects" : [ "Investments", "Portfolio management" ],
+  "classifications" : [ {
+    "classificationNumber" : "HG4521 .B564 2018",
+    "classificationTypeId" : "ce176ace-a53e-4b4d-aa89-725ed7b2edac"
+  } ],
+  "publication" : [ {
+    "publisher" : "McGraw-Hill Education",
+    "place" : "New York, NY",
+    "dateOfPublication" : "[2018]",
+    "role" : "Publication"
+  } ],
+  "publicationFrequency" : [ ],
+  "publicationRange" : [ ],
+  "electronicAccess" : [ ],
+  "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+  "instanceFormatIds" : [ "8d511d33-5e85-4c5d-9bce-6e3c9cd0c324" ],
+  "instanceFormats" : [ ],
+  "physicalDescriptions" : [ "xxviii, 968 pages ; 26 cm" ],
+  "languages" : [ "eng" ],
+  "notes" : [ {
+    "note" : "Includes bibliographical references and indexes",
+    "staffOnly" : false,
+    "instanceNoteTypeId" : "86b6e817-e1bc-42fb-bab0-70e7547de6c1"
+  }, {
+    "note" : "This title is in use by DIBS, the Caltech Digital Borrowing System, for course reserves. Caltechers can access this title using their access.caltech credentials via this link: https://apps.library.caltech.edu/dibs/item/35047019628627",
+    "staffOnly" : false,
+    "instanceNoteTypeId" : "e814a32e-02da-4773-8f3a-6629cdb7ecdf"
+  }, {
+    "note" : "PP",
+    "staffOnly" : true,
+    "instanceNoteTypeId" : "957f0d61-6cea-443a-b39e-2bc1e644c8a1"
+  }, {
+    "note" : "200325",
+    "staffOnly" : true,
+    "instanceNoteTypeId" : "3b66e7a6-2389-4701-b801-6bdc72106598"
+  } ],
+  "modeOfIssuanceId" : "9d18a02f-5897-4c31-9106-c9abb5c7ae8b",
+  "staffSuppress" : false,
+  "discoverySuppress" : false,
+  "statisticalCodeIds" : [ ],
+  "statusUpdatedDate" : "2021-09-15T19:08:00.290+0000",
+  "metadata" : {
+    "createdDate" : "2021-09-15T19:08:00.290+00:00",
+    "createdByUserId" : "25148b30-565b-4012-8300-451fb5cbe124",
+    "updatedDate" : "2021-09-15T19:08:00.290+00:00",
+    "updatedByUserId" : "25148b30-565b-4012-8300-451fb5cbe124"
+  },
+  "holdingsRecords2" : [ ],
+  "natureOfContentTermIds" : [ ]
+}

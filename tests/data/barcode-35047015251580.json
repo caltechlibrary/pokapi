@@ -1,0 +1,103 @@
+{
+  "instances" : [ {
+    "@context" : "http://127.0.0.1:8082/inventory/instances/context",
+    "id" : "ada3b101-eb41-40ed-b553-4467da58245e",
+    "hrid" : "584983",
+    "source" : "MARC",
+    "title" : "Spacetime physics : introduction to special relativity / Edwin F. Taylor, John Archibald Wheeler",
+    "indexTitle" : "Spacetime physics : introduction to special relativity",
+    "alternativeTitles" : [ ],
+    "editions" : [ "2nd ed" ],
+    "series" : [ ],
+    "identifiers" : [ {
+      "identifierTypeId" : "c858e4f2-2b6b-4385-842b-60732ee14abb",
+      "value" : "92000722"
+    }, {
+      "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422",
+      "value" : "0716723271"
+    }, {
+      "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422",
+      "value" : "0716723263 (cased)"
+    }, {
+      "identifierTypeId" : "7e591197-f335-4afb-bc6d-a6d76ca3bace",
+      "value" : "25165077"
+    }, {
+      "identifierTypeId" : "56e2db07-522d-417b-84b4-a78c123a78e5",
+      "value" : ".b12707909"
+    }, {
+      "identifierTypeId" : "56e2db07-522d-417b-84b4-a78c123a78e5",
+      "value" : "oai:caltech.tind.io:584983"
+    } ],
+    "contributors" : [ {
+      "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+      "name" : "Taylor, Edwin  F",
+      "contributorTypeId" : "9f0a2cf0-7a9b-45a2-a403-f68d2850d07c",
+      "contributorTypeText" : "Contributor",
+      "primary" : true
+    }, {
+      "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+      "name" : "Wheeler, John Archibald, 1911-",
+      "contributorTypeId" : "9f0a2cf0-7a9b-45a2-a403-f68d2850d07c",
+      "contributorTypeText" : "Contributor",
+      "primary" : false
+    } ],
+    "subjects" : [ "Special relativity (Physics)" ],
+    "classifications" : [ {
+      "classificationNumber" : "QC6 .T35 1991",
+      "classificationTypeId" : "ce176ace-a53e-4b4d-aa89-725ed7b2edac"
+    } ],
+    "publication" : [ {
+      "publisher" : "W.H. Freeman",
+      "place" : "New York",
+      "dateOfPublication" : "c1992",
+      "role" : null
+    } ],
+    "publicationFrequency" : [ ],
+    "publicationRange" : [ ],
+    "electronicAccess" : [ ],
+    "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+    "instanceFormatIds" : [ ],
+    "physicalDescriptions" : [ "vii, 312 p. : ill. ; 28 cm" ],
+    "languages" : [ "eng" ],
+    "notes" : [ {
+      "instanceNoteTypeId" : "86b6e817-e1bc-42fb-bab0-70e7547de6c1",
+      "note" : "Includes bibliographical references and index",
+      "staffOnly" : false
+    }, {
+      "instanceNoteTypeId" : "e814a32e-02da-4773-8f3a-6629cdb7ecdf",
+      "note" : "This title is in use by DIBS, the Caltech Digital Borrowing System, for course reserves. Caltechers can access this title using their access.caltech credentials via this link: https://apps.library.caltech.edu/dibs/item/35047015251580",
+      "staffOnly" : false
+    }, {
+      "instanceNoteTypeId" : "1c017b8d-c783-4f63-b620-079f7a5b9c07",
+      "note" : "retained SCELC shared print 20170712 CIT",
+      "staffOnly" : false
+    }, {
+      "instanceNoteTypeId" : "957f0d61-6cea-443a-b39e-2bc1e644c8a1",
+      "note" : "gfh",
+      "staffOnly" : true
+    }, {
+      "instanceNoteTypeId" : "3b66e7a6-2389-4701-b801-6bdc72106598",
+      "note" : "091204",
+      "staffOnly" : true
+    } ],
+    "modeOfIssuanceId" : "9d18a02f-5897-4c31-9106-c9abb5c7ae8b",
+    "staffSuppress" : false,
+    "discoverySuppress" : false,
+    "statisticalCodeIds" : [ ],
+    "statusUpdatedDate" : "2021-09-15T18:59:10.116+0000",
+    "metadata" : {
+      "createdDate" : "2021-09-15T18:59:10.117+00:00",
+      "createdByUserId" : "25148b30-565b-4012-8300-451fb5cbe124",
+      "updatedDate" : "2021-09-15T18:59:10.117+00:00",
+      "updatedByUserId" : "25148b30-565b-4012-8300-451fb5cbe124"
+    },
+    "tags" : {
+      "tagList" : [ ]
+    },
+    "natureOfContentTermIds" : [ ],
+    "links" : {
+      "self" : "http://127.0.0.1:8082/inventory/instances/ada3b101-eb41-40ed-b553-4467da58245e"
+    }
+  } ],
+  "totalRecords" : 1
+}

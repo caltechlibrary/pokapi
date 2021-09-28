@@ -1,0 +1,80 @@
+{
+  "instances" : [ {
+    "@context" : "http://127.0.0.1:8082/inventory/instances/context",
+    "id" : "4f114d62-90b8-4b2b-befb-5d81be6963cc",
+    "hrid" : "934295",
+    "source" : "MARC",
+    "title" : "Marbles : mania, depression, Michelangelo, and me : a graphic memoir / by Ellen Forney.",
+    "indexTitle" : "Marbles : mania, depression, michelangelo, and me : a graphic memoir",
+    "alternativeTitles" : [ ],
+    "editions" : [ ],
+    "series" : [ ],
+    "identifiers" : [ {
+      "identifierTypeId" : "c858e4f2-2b6b-4385-842b-60732ee14abb",
+      "value" : "2012014588"
+    }, {
+      "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422",
+      "value" : "9781592407323"
+    }, {
+      "identifierTypeId" : "56e2db07-522d-417b-84b4-a78c123a78e5",
+      "value" : "oai:caltech.tind.io:934295"
+    } ],
+    "contributors" : [ {
+      "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+      "name" : "Forney, Ellen",
+      "contributorTypeId" : "9f0a2cf0-7a9b-45a2-a403-f68d2850d07c",
+      "contributorTypeText" : "Contributor",
+      "primary" : true
+    } ],
+    "subjects" : [ "Forney, Ellen Comic books, strips, etc", "Manic-depressive illness Comic books, strips, etc" ],
+    "classifications" : [ {
+      "classificationNumber" : "PN6727.F678 M37 2012",
+      "classificationTypeId" : "ce176ace-a53e-4b4d-aa89-725ed7b2edac"
+    } ],
+    "publication" : [ {
+      "publisher" : "Gotham Books",
+      "place" : "New York",
+      "dateOfPublication" : "c2012",
+      "role" : null
+    } ],
+    "publicationFrequency" : [ ],
+    "publicationRange" : [ ],
+    "electronicAccess" : [ ],
+    "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+    "instanceFormatIds" : [ ],
+    "physicalDescriptions" : [ "248 p. : ill. ; 23 cm." ],
+    "languages" : [ "eng" ],
+    "notes" : [ {
+      "instanceNoteTypeId" : "e814a32e-02da-4773-8f3a-6629cdb7ecdf",
+      "note" : "This title is in use by DIBS, the Caltech Digital Borrowing System, for course reserves. Caltechers can access this title using their access.caltech credentials via this link: https://apps.library.caltech.edu/dibs/item/35047019077817",
+      "staffOnly" : false
+    }, {
+      "instanceNoteTypeId" : "957f0d61-6cea-443a-b39e-2bc1e644c8a1",
+      "note" : "PP",
+      "staffOnly" : true
+    }, {
+      "instanceNoteTypeId" : "3b66e7a6-2389-4701-b801-6bdc72106598",
+      "note" : "180330",
+      "staffOnly" : true
+    } ],
+    "modeOfIssuanceId" : "9d18a02f-5897-4c31-9106-c9abb5c7ae8b",
+    "staffSuppress" : false,
+    "discoverySuppress" : false,
+    "statisticalCodeIds" : [ ],
+    "statusUpdatedDate" : "2021-09-15T19:07:48.924+0000",
+    "metadata" : {
+      "createdDate" : "2021-09-15T19:07:48.924+00:00",
+      "createdByUserId" : "25148b30-565b-4012-8300-451fb5cbe124",
+      "updatedDate" : "2021-09-15T19:07:48.924+00:00",
+      "updatedByUserId" : "25148b30-565b-4012-8300-451fb5cbe124"
+    },
+    "tags" : {
+      "tagList" : [ ]
+    },
+    "natureOfContentTermIds" : [ ],
+    "links" : {
+      "self" : "http://127.0.0.1:8082/inventory/instances/4f114d62-90b8-4b2b-befb-5d81be6963cc"
+    }
+  } ],
+  "totalRecords" : 1
+}
