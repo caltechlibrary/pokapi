@@ -61,7 +61,8 @@ class Folio():
         self.an_prefix = an_prefix
 
 
-    def record(self, barcode = None, accession_number = None, instance_id = None):
+    def record(self, barcode = None, accession_number = None, instance_id = None,
+               raw_json = None):
         '''Create a FolioRecord object given a barcode, accession number, or
         instance id.  The arguments are mutually exclusive.
 
@@ -72,7 +73,7 @@ class Folio():
 
         If no argument is given, this returns an empty FolioRecord.
         '''
-        args = [barcode, accession_number, instance_id]
+        args = [barcode, accession_number, instance_id, raw_json]
         if sum(map(bool, args)) > 1:
             raise ValueError(f'Keyword args to record() are mutually exclusive.')
         if barcode:
@@ -83,11 +84,22 @@ class Folio():
             return self._record_from_server(_INSTANCE_FOR_INSTANCE_ID, instance_id)
         elif instance_id:
             return self._record_from_server(_INSTANCE_FOR_INSTANCE_ID, instance_id)
+        elif raw_json:
+            return self._record_from_server(raw_json = raw_json)
         else:
             return FolioRecord()
 
 
-    def _record_from_server(self, url_template, identifier):
+    def _record_from_server(self, url_template = None, identifier = None,
+                            raw_json = None):
+        '''Create a FolioRecord object from data returned by the server.
+
+        Callers should either provide a value for both "url_template" and
+        "identifier", OR a value for "raw_json".  If the latter, the value
+        should be instance data as JSON returned by FOLIO OKAPI.  This is
+        useful when testing, and may be useful if callers cache the values.
+        '''
+
         def response_handler(resp):
             if not resp or not resp.text:
                 if __debug__: log(f'FOLIO returned no result for {request_url}')
@@ -110,10 +122,23 @@ class Folio():
                 if __debug__: log(f'using only first value')
             return data_dict['instances'][0]
 
-        request_url = url_template.format(self.okapi_url, identifier)
-        json_dict = self._result_from_api(request_url, response_handler)
+        if raw_json:
+            if isinstance(raw_json, str):
+                json_dict = json.loads(raw_json)
+            elif isinstance(raw_json, dict):
+                json_dict = raw_json
+            else:
+                raise ValueError('Raw JSON value can only be string or dict')
+            # Handle both the output of calling /inventory/instances/...
+            # and the _raw_data field value saved in our FolioRecord objects.
+            if 'instances' in json_dict:
+                json_dict = json_dict['instances'][0]
+        else:
+            request_url = url_template.format(self.okapi_url, identifier)
+            json_dict = self._result_from_api(request_url, response_handler)
         if not json_dict:
             raise NotFound(f'Could not find a record for {identifier}')
+
         isbn_issn = isbn_issn_from_identifiers(json_dict['identifiers'])
         instance_id = json_dict['id']
         accession_number = self.accession_number_from_id(instance_id)
