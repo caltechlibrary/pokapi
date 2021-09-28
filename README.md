@@ -4,7 +4,7 @@ Pokapi (_Python Okapi Interface_)  is a Python package for getting basic data fr
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://choosealicense.com/licenses/bsd-3-clause)
 [![Latest release](https://img.shields.io/github/v/release/caltechlibrary/pokapi.svg?style=flat-square&color=b44e88)](https://github.com/caltechlibrary/pokapi/releases)
-[![DOI](https://img.shields.io/badge/dynamic/json.svg?label=DOI&style=flat-square&colorA=gray&colorB=navy&query=$.metadata.doi&uri=https://data.caltech.edu/api/record/2124)](https://data.caltech.edu/records/2124)
+[![DOI](https://img.shields.io/badge/dynamic/json.svg?label=DOI&style=flat-square&colorA=gray&colorB=navy&query=$.metadata.doi&uri=https://data.caltech.edu/api/record/2131)](https://data.caltech.edu/records/2131)
 [![Python](https://img.shields.io/badge/Python-3.6+-brightgreen.svg?style=flat-square)](http://shields.io)
 [![PyPI](https://img.shields.io/pypi/v/pokapi.svg?style=flat-square&color=orange)](https://pypi.org/project/pokapi/)
 
