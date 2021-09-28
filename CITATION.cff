@@ -15,5 +15,5 @@ keywords:
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/caltechlibrary/pokapi"
 title: "Python Okapi Interface"
-version: "0.0.0"
+version: "0.3.0"
 ...
