@@ -24,7 +24,9 @@ Pokapi (_Python Okapi Interface_)  is a Python package for getting basic data fr
 
 ## Introduction
 
-The [FOLIO](https://www.folio.org) platform is a [library services platform](https://www.niso.org/sites/default/files/stories/2017-09/FE_Grant_Future_Library_Systems_%20isqv24no4.pdf).  The Caltech Library uses a hosted solution by [EBSCO](https://www.ebsco.com) for its [library catalog](https://www.library.caltech.edu/libsearch).   To make writing interfaces and automation scripts in Python easier, the Caltech Library [Digital Library Development team](https://www.library.caltech.edu/staff?&field_directory_department%5B0%5D=754) are developing Pokapi (_Python Okapi Interface_), a Python package that provides an object-oriented interface to accessing in a FOLIO record data via the [Okapi API](https://github.com/folio-org/okapi/blob/master/doc/guide.md).
+The [FOLIO](https://www.folio.org) platform is a [library services platform](https://www.niso.org/sites/default/files/stories/2017-09/FE_Grant_Future_Library_Systems_%20isqv24no4.pdf).  The Caltech Library uses a hosted solution by [EBSCO](https://www.ebsco.com) for its [library catalog](https://www.library.caltech.edu/libsearch).   To make writing interfaces and automation scripts in Python easier, the Caltech Library [Digital Library Development team](https://www.library.caltech.edu/staff?&field_directory_department%5B0%5D=754) are developing Pokapi (_Python Okapi Interface_), a Python package that provides an object-oriented interface to accessing FOLIO data via the [Okapi API](https://github.com/folio-org/okapi/blob/master/doc/guide.md). It currently provides a simple object structure based mostly on FOLIO _instance_ records.
+
+Incidentally, [okapi](https://en.wikipedia.org/wiki/Okapi) (properly known as _Okapia johnstoni_) are real animals related to the giraffe. They are an [endangered species](https://www.iucnredlist.org/species/15188/51140517) whose population continues to decrease due to human activity and [hunting by humans](https://www.nationalgeographic.com/animals/mammals/facts/okapi).
 
 
 ## Installation
@@ -66,8 +68,8 @@ As an example of a prefix for accession numbers, for Caltech the prefix is the `
 
 The `Folio` class has only one method on it currently: `record(...)`. This method contacts the FOLIO server to obtain data and returns a `FolioRecord` object with the data stored in fields. The following fields are implemented at this time:
 
-| Field              | Type   | Meaning |
-|--------------------|--------|---------|
+| Field            | Type   | Meaning |
+|------------------|--------|---------|
 | `id`               | string | FOLIO instance record identifier |
 | `accession_number` | string | The accession number for the record |
 | `title`            | string | Title of the work |
@@ -123,7 +125,7 @@ Software produced by the Caltech Library is Copyright © 2021 California Institu
 
 This work was funded by the California Institute of Technology Library.
 
-The [vector artwork](https://thenounproject.com/term/okapi-face/1546683/) of the face of an okapi, used as the icon for this project, was created by [Icons Producer](https://thenounproject.com/iconsproducer/) from the Noun Project.  It is licensed under the Creative Commons [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
+The [vector artwork](https://thenounproject.com/term/okapi-face/1546683/) of the face of an [okapi](https://en.wikipedia.org/wiki/Okapi), used as the icon for this project, was created by [Icons Producer](https://thenounproject.com/iconsproducer/) from the Noun Project.  It is licensed under the Creative Commons [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/) license.
 
 Pokapi makes use of numerous open-source packages, without which Pokapi could not have been developed.  I want to acknowledge this debt.  In alphabetical order, the packages are:
 
