@@ -54,7 +54,16 @@ class Folio():
     '''Interface to a FOLIO server using Okapi.'''
 
     def __init__(self, okapi_url, okapi_token, tenant_id, an_prefix):
-        '''Create an interface to the Folio server at "okapi_url".'''
+        '''Create an interface to the Folio server at "okapi_url".
+
+        The parameters define certain things Pokapi can't get on its own.
+        These are: the the Okapi URL for your instance, an Okapi API token, a
+        tenant id, and the prefix that appears in front of your accession
+        numbers.  (As an example of a prefix for accession numbers, for
+        Caltech the prefix is the 'clc' part of an accession number such as
+        'clc.025d49d5.735a.4d79.8889.c5895ac65fd2'.)
+        '''
+
         self.okapi_url = okapi_url
         self.okapi_token = okapi_token
         self.tenant_id = tenant_id
@@ -63,8 +72,22 @@ class Folio():
 
     def record(self, barcode = None, accession_number = None, instance_id = None,
                raw_json = None):
-        '''Create a FolioRecord object given a barcode, accession number, or
-        instance id.  The arguments are mutually exclusive.
+        '''Create a FolioRecord object.
+
+        The arguments are mutually exclusive; callers must supply only one
+        of the following:
+
+          * 'barcode': retrieve the record corresponding to the given item
+            barcode
+
+          * 'instance_id': retrieve the record having the given FOLIO
+            instance identifier
+
+          * 'accession_number': retrieve the record corresponding to the
+            accession number
+
+          * 'raw_json': (for advanced uses) the JSON content returned by
+            FOLIO for an instance record, for example from a past call
 
         This contacts the FOLIO server and perform a search using the given
         identifier, then creates a FolioRecord object and returns it.  If
@@ -73,6 +96,7 @@ class Folio():
 
         If no argument is given, this returns an empty FolioRecord.
         '''
+
         args = [barcode, accession_number, instance_id, raw_json]
         if sum(map(bool, args)) > 1:
             raise ValueError(f'Keyword args to record() are mutually exclusive.')
@@ -206,6 +230,7 @@ def cleaned(text):
 
 
 def pub_year(publication_list):
+    '''Return the publication year of the first entry in the publication list.'''
     if publication_list:
         year = publication_list[0]['dateOfPublication']
         return ''.join(filter(str.isdigit, year))
@@ -214,6 +239,7 @@ def pub_year(publication_list):
 
 
 def publisher(publication_list):
+    '''Return the publisher name of the first entry in the publication list.'''
     if publication_list:
         return publication_list[0]['publisher']
     else:
