@@ -1,5 +1,10 @@
 # Change log for Pokapi
 
+## Version 0.3.1
+
+There are no functional changes in this release; all the changes consist of minor cleanup and documentation updates.
+
+
 ## Version 0.3.0
 
 Changes in this release:
