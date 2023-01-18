@@ -1,19 +1,18 @@
-# YAML 1.2
----
+cff-version: 1.2
+message: "If you use this software, please cite it using these metadata."
+title: "Pokapi: Python Okapi Interface"
 authors: 
   -
     affiliation: "Caltech Library"
+    given-names: Mike
     family-names: Hucka
-    given-names: Michael
-    orcid: "https://orcid.org/0000-0001-9105-5960"
-cff-version: "1.1.0"
-date-released: 2021-08-20
-doi: 
-keywords: 
-  - Folio
-  - Library Services Platforms
-message: "If you use this software, please cite it using these metadata."
+    orcid: "0000-0001-9105-5960"
+version: "1.5.3"
+abstract: "A tool to do bulk changes in FOLIO using the OKAPI API"
 repository-code: "https://github.com/caltechlibrary/pokapi"
-title: "Python Okapi Interface"
-version: "0.3.0"
-...
+type: software
+license-url: "https://github.com/caltechlibrary/foliage/blob/main/LICENSE"
+keywords: 
+  - FOLIO
+  - Library Services Platforms
+date-released: 2023-01-18
