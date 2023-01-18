@@ -28,11 +28,11 @@ class PokapiException(Exception):
 # .............................................................................
 
 class FolioError(PokapiException):
-    '''Unrecoverable problem involving interactions with the Folio server.'''
+    '''Unrecoverable problem involving interactions with the FOLIO server.'''
 
 
 class PermissionError(PokapiException):
-    '''Problem with permissions or tokens accessing the Folio server.'''
+    '''Problem with permissions or tokens accessing the FOLIO server.'''
 
 
 class DataMismatchError(PokapiException):
@@ -40,4 +40,4 @@ class DataMismatchError(PokapiException):
 
 
 class NotFound(PokapiException):
-    '''A requested item was not found in the Folio server.'''
+    '''A requested item was not found in the FOLIO server.'''
