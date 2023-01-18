@@ -7,7 +7,7 @@ authors:
     given-names: Mike
     family-names: Hucka
     orcid: "0000-0001-9105-5960"
-version: "1.5.3"
+version: "0.4.0"
 abstract: "A tool to do bulk changes in FOLIO using the OKAPI API"
 repository-code: "https://github.com/caltechlibrary/pokapi"
 type: software

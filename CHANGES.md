@@ -1,5 +1,12 @@
 # Change log for Pokapi
 
+## Version 0.4.0
+
+This release adds a new exception class, `PermissionError`, to make it easier to detect problems involving such things as expired tokens.
+
+Internally, code comments have been updated in a few places (e.g., to update the copyright year), linting with flake8 has been done, and some other minor corrections have been made.
+
+
 ## Version 0.3.1
 
 There are no functional changes in this release; all the changes consist of minor cleanup and documentation updates.
