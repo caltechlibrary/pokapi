@@ -9,7 +9,7 @@ Michael Hucka <mhucka@caltech.edu> -- Caltech Library
 Copyright
 ---------
 
-Copyright (c) 2021 by the California Institute of Technology.  This code
+Copyright (c) 2021-2023 by the California Institute of Technology.  This code
 is open-source software released under a 3-clause BSD license.  Please see the
 file "LICENSE" for more information.
 '''
@@ -206,6 +206,11 @@ class Folio():
                 if __debug__: log(f'hit rate limit; pausing {_RATE_LIMIT_SLEEP}s')
                 wait(_RATE_LIMIT_SLEEP)
                 return self._result_from_api(url, result_producer, retry = retry)
+        elif isinstance(error, AuthenticationFailure):
+            raise 
+
+            if __debug__: log(f'got authentication error for {url}')
+            return result_producer(None)
         else:
             raise FolioError(f'Problem contacting {url}: {antiformat(error)}')
 

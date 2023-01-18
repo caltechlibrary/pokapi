@@ -9,7 +9,7 @@ Michael Hucka <mhucka@caltech.edu> -- Caltech Library
 Copyright
 ---------
 
-Copyright (c) 2021 by the California Institute of Technology.  This code is
+Copyright (c) 2021-2023 by the California Institute of Technology.  This code is
 open-source software released under a 3-clause BSD license.  Please see the
 file "LICENSE" for more information.
 '''
@@ -22,7 +22,6 @@ file "LICENSE" for more information.
 
 class PokapiException(Exception):
     '''Base class for Pokapi exceptions.'''
-    pass
 
 
 # Exception classes.
@@ -30,12 +29,15 @@ class PokapiException(Exception):
 
 class FolioError(PokapiException):
     '''Unrecoverable problem involving interactions with the Folio server.'''
-    pass
+
+
+class PermissionError(PokapiException):
+    '''Problem with permissions or tokens accessing the Folio server.'''
+
 
 class DataMismatchError(PokapiException):
     '''Unrecoverable problem involving Pokapi.'''
-    pass
+
 
 class NotFound(PokapiException):
     '''A requested item was not found in the Folio server.'''
-    pass
