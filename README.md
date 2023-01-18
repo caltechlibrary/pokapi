@@ -4,8 +4,7 @@ Pokapi (_Python Okapi Interface_)  is a Python package for getting basic data fr
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://choosealicense.com/licenses/bsd-3-clause)
 [![Latest release](https://img.shields.io/github/v/release/caltechlibrary/pokapi.svg?style=flat-square&color=b44e88)](https://github.com/caltechlibrary/pokapi/releases)
-[![DOI](https://img.shields.io/badge/dynamic/json.svg?label=DOI&style=flat-square&colorA=gray&colorB=navy&query=$.metadata.doi&uri=https://data.caltech.edu/api/record/2132)](https://data.caltech.edu/records/2132)
-[![Python](https://img.shields.io/badge/Python-3.6+-brightgreen.svg?style=flat-square)](http://shields.io)
+[![Python](https://img.shields.io/badge/Python-3.8+-brightgreen.svg?style=flat-square)](http://shields.io)
 [![PyPI](https://img.shields.io/pypi/v/pokapi.svg?style=flat-square&color=orange)](https://pypi.org/project/pokapi/)
 
 
@@ -118,7 +117,7 @@ We would be happy to receive your help and participation with enhancing Pokapi! 
 
 ## License
 
-Software produced by the Caltech Library is Copyright © 2021 California Institute of Technology.  This software is freely distributed under a BSD/MIT type license.  Please see the [LICENSE](LICENSE) file for more information.
+Software produced by the Caltech Library is Copyright © 2021&ndash;2023 California Institute of Technology.  This software is freely distributed under a BSD/MIT type license.  Please see the [LICENSE](LICENSE) file for more information.
 
 
 ## Acknowledgments
