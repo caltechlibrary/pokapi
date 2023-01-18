@@ -14,19 +14,17 @@ is open-source software released under a 3-clause BSD license.  Please see the
 file "LICENSE" for more information.
 '''
 
-from   commonpy.exceptions import NoContent, ServiceFailure, RateLimitExceeded
+from   commonpy.exceptions import NoContent, RateLimitExceeded, AuthenticationFailure
 from   commonpy.interrupt import wait
 from   commonpy.string_utils import antiformat
 from   commonpy.network_utils import net
 import json
-from   json import JSONDecodeError
 import regex
-from   uritemplate import expand as expanded
 
 if __debug__:
     from sidetrack import log
 
-from .exceptions import *
+from .exceptions import FolioError, FolioPermissionError, NotFound
 from .record import FolioRecord
 
 
@@ -99,7 +97,7 @@ class Folio():
 
         args = [barcode, accession_number, instance_id, raw_json]
         if sum(map(bool, args)) > 1:
-            raise ValueError(f'Keyword args to record() are mutually exclusive.')
+            raise ValueError('Keyword args to record() are mutually exclusive.')
         if barcode:
             return self._record_from_server(_INSTANCE_FOR_BARCODE, barcode)
         elif accession_number:
@@ -131,7 +129,7 @@ class Folio():
             data_dict = json.loads(resp.text)
             # Depending on the way we're getting it, the record might be
             # directly provided or it might be in a list of records.
-            if not 'totalRecords' in data_dict:
+            if 'totalRecords' not in data_dict:
                 if 'title' in data_dict:
                     # It's a record directly and not a list of records.
                     return data_dict
@@ -143,7 +141,7 @@ class Folio():
             elif data_dict['totalRecords'] > 1:
                 total = data_dict['totalRecords']
                 if __debug__: log(f'got {total} records for {request_url}')
-                if __debug__: log(f'using only first value')
+                if __debug__: log('using only first value')
             return data_dict['instances'][0]
 
         if raw_json:
@@ -207,10 +205,7 @@ class Folio():
                 wait(_RATE_LIMIT_SLEEP)
                 return self._result_from_api(url, result_producer, retry = retry)
         elif isinstance(error, AuthenticationFailure):
-            raise 
-
-            if __debug__: log(f'got authentication error for {url}')
-            return result_producer(None)
+            raise FolioPermissionError(f'Authentication error for {url}')
         else:
             raise FolioError(f'Problem contacting {url}: {antiformat(error)}')
 
