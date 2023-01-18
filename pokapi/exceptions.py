@@ -31,7 +31,7 @@ class FolioError(PokapiException):
     '''Unrecoverable problem involving interactions with the FOLIO server.'''
 
 
-class PermissionError(PokapiException):
+class FolioPermissionError(PokapiException):
     '''Problem with permissions or tokens accessing the FOLIO server.'''
 
 
