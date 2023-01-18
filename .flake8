@@ -36,9 +36,14 @@ ignore =
     # and colons.
     E203,
     E226,
+    # We use if __debug__: .... for efficiency.
+    E701,
     # According to Flake8 docs at https://www.flake8rules.com/rules/W503.html
     # line breaks *should* come before a binary operator, but as of version 4,
     # Flake8 still flags the breaks as bad. So:
     W503
     # I disagree wit this one.
     B005
+
+per-file-ignores =
+    pokapi/__init__.py: E402, E272
