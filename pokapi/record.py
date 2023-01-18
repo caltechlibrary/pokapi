@@ -14,11 +14,6 @@ is open-source software released under a 3-clause BSD license.  Please see the
 file "LICENSE" for more information.
 '''
 
-if __debug__:
-    from sidetrack import log
-
-from .exceptions import DataMismatchError
-
 
 # Class definitions.
 # .............................................................................
