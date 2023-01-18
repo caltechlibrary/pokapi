@@ -74,6 +74,7 @@ __pycache__
 *$py.class
 *.egg-info
 .eggs
+.coverage
 
 # InnoSetup-specific things to ignore:
 # .............................................................................
@@ -94,6 +95,7 @@ __pycache__
 # .............................................................................
 
 tests/settings.ini
-.*.md.tmp
+*.md.tmp
 dist/*
 build/*
+
