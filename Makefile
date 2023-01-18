@@ -274,7 +274,7 @@ clean-other:;
 	pyinstaller clean clean-dist clean-build clean-release clean-other \
 	really-clean really-clean-dist really-clean-build completely-clean
 
-.PHONY: help vars report release test-branch \
+.PHONY: help vars report release test-branch test tests \
 	update-init update-meta update-citation commit-updates \
 	release-on-github print-instructions update-doi \
 	packages test-pypi pypi clean really-clean completely-clean \
